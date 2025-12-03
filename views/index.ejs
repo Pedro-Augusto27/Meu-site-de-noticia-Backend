@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title> Notícias - Home </title>
+
+</head>
+
+<body>
+    <header>
+        <h1> Notícias </h1>
+        <nav>
+            <ul>
+                <li><a href="home.html">Home</a></li>
+                <li><a href="noticia.html">Notícias</a></li>
+                <li><a href="contato.html">Contato</a></li>
+            </ul>
+        </nav>
+
+        <form action="/buscar" method="get">
+            <input type="text" nome="q" placeholder="Buscar...">
+            <button type="submit">Buscar</button>
+        </form>
+    </header>
+    <br>
+    <br>
+
+
+    <main>
+
+        <!-- GRID DE NOTÍCIA -->
+        <h2> Principais Notícias: </h2>
+
+        <!-- Notícia 1 -->
+        <div class="container">
+            <!-- INÍCIO DO LOOP: Para cada notícia na lista... -->
+
+            <% noticias.forEach(function(item) { %>
+                <article class="card-noticia">
+                    <!-- Lógica da Imagem: Se não tiver foto na API, usa uma padrão -->
+                    <img src="<%= item.urlToImage || '/img/padrao.jpg' %>" alt="Imagem da notícia"
+                        onerror="this.src='/img/padrao.jpg'" />
+                    <div class="conteudo">
+                        <h3>
+                            <%= item.title %>
+                        </h3>
+                        <!-- Descrição (limita caso venha vazio) -->
+                        <p>
+                            <%= item.description || 'Sem descrição disponível.' %>
+                        </p>
+                        <!-- Link para a notícia original -->
+                        <a href="<%= item.url %>" target="_blank" class="botao">Ler Completa</a>
+                    </div>
+                </article>
+                <% }); %>
+                    <!-- FIM DO LOOP -->
+        </div>
+
+
+    </main>
+
+
+</body>
+
+</html>
